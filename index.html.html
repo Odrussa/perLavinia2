@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Lavinia 🌸</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap');
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffeef2;
+            color: #5c4147;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            border: 3px solid #ffb6c1;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #ff6b8b;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .emoji {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+            margin: 15px 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            color: #ff6b8b;
+            font-weight: 700;
+        }
+
+        .quiz-section {
+            background-color: #fff5f7;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px dashed #ffb6c1;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .quiz-title {
+            font-weight: 700;
+            color: #ff6b8b;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .options-btn {
+            display: block;
+            width: 100%;
+            background-color: white;
+            border: 2px solid #ffb6c1;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5c4147;
+            transition: all 0.3s ease;
+        }
+
+        .options-btn:hover {
+            background-color: #ffb6c1;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        #btn-no {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-message {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff6b8b;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Schermata Principale -->
+        <div id="main-card">
+            <h1>Ciao Lavinia... 🥺</h1>
+            <div class="emoji">🧸</div>
+            <p>Volevo dirti che mi dispiace moltissimo. A volte sono proprio un pasticcione... ( • ᴖ • ｡ ) <br><br>Per farmi perdonare ho preparato questo piccolissimo questionario.</p>
+            
+            <button class="options-btn" style="background-color: #ff6b8b; color: white; border: none;" onclick="iniziaQuiz()">Apri il questionario 💖</button>
+        </div>
+
+        <!-- Sezione Quiz (Nascosta all'inizio) -->
+        <div id="quiz-card" class="hidden">
+            <div class="quiz-section">
+                <div id="question-1">
+                    <p class="quiz-title">Domanda 1 di 2</p>
+                    <p style="text-align: center; font-weight: bold;">Cosa dovrei fare per farmi perdonare ufficialmente?</p>
+                    <button class="options-btn" onclick="prossimaDomanda()">Farmi distruggere l'uretra 🤕</button>
+                    <button class="options-btn" onclick="prossimaDomanda()">Inondarti di messaggi carini e coccole 🐻</button>
+                    <button class="options-btn" onclick="prossimaDomanda()">Tutte le risposte precedenti + un bacio gigantesco 💋</button>
+                </div>
+
+                <div id="question-2" class="hidden">
+                    <p class="quiz-title">Domanda 2 di 2</p>
+                    <p style="text-align: center; font-weight: bold;">Quindi, mi perdoni? <span class="highlight">(Sii sincera!)</span></p>
+                    <button class="options-btn" style="background-color: #edf7ed; border-color: #a3cfbb;" onclick="mostraFinale()">Sì, dai, te lo sei meritato! ✨</button>
+                    <!-- Il tasto NO scappa quando ci passi sopra -->
+                    <button class="options-btn" id="btn-no" style="background-color: #f8d7da; border-color: #f5c2c7;" onmouseover="scappaNo()" onclick="scappaNo()">Assolutamente no 😤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Finale (Nascosta all'inizio) -->
+        <div id="final-card" class="hidden success-message">
+            <div style="font-size: 4rem; margin-bottom: 15px;">🎉</div>
+            <p>Sapevo che avevi un cuore d'oro! ❤️</p>
+            <p style="font-size: 1rem; color: #7d5a61; font-weight: 500;">Promessa mantenuta. Preparati, perché il riscatto delle scuse scatta prestissimo! 🚀✨</p>
+            <div class="emoji">🥰🌷</div>
+        </div>
+    </div>
+
+    <script>
+        function iniziaQuiz() {
+            document.getElementById('main-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+        }
+
+        function prossimaDomanda() {
+            document.getElementById('question-1').classList.add('hidden');
+            document.getElementById('question-2').classList.remove('hidden');
+        }
+
+        function mostraFinale() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('final-card').classList.remove('hidden');
+        }
+
+        // Funzione simpatica: il pulsante "No" si sposta quando si prova a cliccarlo o toccarlo
+        function scappaNo() {
+            const btnNo = document.getElementById('btn-no');
+            // Genera posizioni casuali per far muovere il pulsante all'interno del contenitore
+            const x = Math.random() * (window.innerWidth < 500 ? 50 : 150) - (window.innerWidth < 500 ? 25 : 75);
+            const y = Math.random() * 100 - 50;
+            
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
